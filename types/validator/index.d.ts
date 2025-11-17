@@ -417,7 +417,8 @@ declare namespace validator {
     /**
      * Check if the string is a valid date.
      */
-    export function isDate(str: string, options?: IsDateOptions): boolean;
+    export function isDate(input: Date, formatOrOptions: IsDateOptions & { strictMode: true }): false;
+    export function isDate(input: string | Date, formatOrOptions?: string | IsDateOptions): boolean;
 
     export type DecimalLocale = FloatLocale;
 
@@ -631,7 +632,7 @@ declare namespace validator {
      *
      * @param [options] - Options
      */
-    export function isRgbColor(str: string, options?: IsRgbColorOptions): boolean;
+    export function isRgbColor(str: string, includePercentValuesOrOptions?: boolean | IsRgbColorOptions): boolean;
 
     export type IdentityCardLocale =
         | "ar-LY"
@@ -882,7 +883,7 @@ declare namespace validator {
         /**
          * @default undefined
          */
-        discreteLengths?: number | Array<number> | undefined;
+        discreteLengths?: Array<number> | undefined;
     }
 
     /**
@@ -892,7 +893,8 @@ declare namespace validator {
      *
      * @param [options] - Options
      */
-    export function isLength(str: string, options?: IsLengthOptions): boolean;
+    export function isLength(str: string, minOrOptions?: number | IsLengthOptions): boolean;
+    export function isLength(str: string, min: number, max: number): boolean;
 
     export type LicensePlateLocale =
         | "cs-CZ"
